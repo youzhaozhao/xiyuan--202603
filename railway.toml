@@ -1,6 +1,6 @@
 [build]
-builder = "NIXPACKS"
-buildCommand = "cd xiyuan_frontend && npm ci && npm run build && cd ../xiyuan_backend && npm ci"
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
 
 [deploy]
 startCommand = "node xiyuan_backend/src/server.js"

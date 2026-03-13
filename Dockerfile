@@ -10,8 +10,11 @@ COPY . .
 # 安装前端依赖并构建
 RUN cd xiyuan_frontend && npm ci && npm run build-only
 
+# 编译智能合约（hardhat.config.js 在 xiyuan_smart_contract 目录下）
+RUN cd xiyuan_smart_contract && npm ci && npx hardhat compile
+
 # 安装后端依赖
-RUN cd xiyuan_backend && npm ci && npx hardhat compile
+RUN cd xiyuan_backend && npm ci
 
 # 暴露端口（Railway 会自动映射）
 EXPOSE 3000
