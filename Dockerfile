@@ -1,11 +1,17 @@
 # 使用 Node 20 作为基础镜像
 FROM node:20-alpine
 
+# 安装 git 和 git-lfs
+RUN apk add --no-cache git git-lfs
+
 # 设置工作目录
 WORKDIR /app
 
 # 复制整个项目到容器中
 COPY . .
+
+# 初始化并拉取 LFS 文件
+RUN git lfs install && git lfs pull
 
 # 安装前端依赖并构建
 RUN cd xiyuan_frontend && npm ci && npm run build-only
