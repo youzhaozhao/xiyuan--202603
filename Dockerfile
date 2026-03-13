@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # 安装前端依赖并构建
-RUN cd xiyuan_frontend && npm ci && npm run build
+RUN cd xiyuan_frontend && npm ci && npm run build-only
 
 # 安装后端依赖
 RUN cd xiyuan_backend && npm ci
