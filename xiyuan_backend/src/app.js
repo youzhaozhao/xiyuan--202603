@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const researchRoutes = require('./routes/researchRoutes');
 const blockchainService = require('./services/blockchainService');
 
@@ -25,6 +26,15 @@ app.post('/api/init-contract', async (req, res) => {
   res.json({ message: '设置成功' });
 });
 
-app.get('/', (req, res) => res.json({ message: '后端服务OK' }));
+app.get('/api/health', (req, res) => res.json({ message: '后端服务OK' }));
+
+// Serve frontend build
+const frontendDist = path.join(__dirname, '../../xiyuan_frontend/dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (req, res) => res.sendFile(path.join(frontendDist, 'index.html')));
+} else {
+  app.get('/', (req, res) => res.json({ message: '后端服务OK' }));
+}
 
 module.exports = app;

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const BACKEND = 'http://localhost:3000'
+export const BACKEND = (import.meta.env.VITE_BACKEND_URL as string) || ''
 export const BASE = `${BACKEND}/api/research`
 
 // ── Types ─────────────────────────────────────────────────────────
@@ -96,7 +96,7 @@ export const researchApi = {
 }
 
 // ── Download helper ───────────────────────────────────────────────
-export const IPFS_GATEWAY = 'http://localhost:8081'
+export const IPFS_GATEWAY = (import.meta.env.VITE_IPFS_GATEWAY as string) || 'http://localhost:8081'
 
 export function isLocalFile(ipfsHash: string | undefined): boolean {
   return !ipfsHash || ipfsHash.startsWith('local:') || ipfsHash.startsWith('local_')
