@@ -11,7 +11,7 @@ COPY . .
 RUN cd xiyuan_frontend && npm ci && npm run build-only
 
 # 安装后端依赖
-RUN cd xiyuan_backend && npm ci
+RUN cd xiyuan_backend && npm ci && npx hardhat compile
 
 # 暴露端口（Railway 会自动映射）
 EXPOSE 3000

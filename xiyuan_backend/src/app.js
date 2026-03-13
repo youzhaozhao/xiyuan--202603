@@ -32,7 +32,7 @@ app.get('/api/health', (req, res) => res.json({ message: '后端服务OK' }));
 const frontendDist = path.join(__dirname, '../../xiyuan_frontend/dist');
 if (fs.existsSync(frontendDist)) {
   app.use(express.static(frontendDist));
-  app.get('*', (req, res) => res.sendFile(path.join(frontendDist, 'index.html')));
+  app.get('/*', (req, res) => res.sendFile(path.join(frontendDist, 'index.html')));
 } else {
   app.get('/', (req, res) => res.json({ message: '后端服务OK' }));
 }
